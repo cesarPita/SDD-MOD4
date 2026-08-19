@@ -1,0 +1,367 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Add required dependencies to `pom.xml`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107708474
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107739006
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108018201
+      }
+    ],
+    "2. Configure Flyway properties in `application.properties`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107708682
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108024698
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108056009
+      }
+    ],
+    "3. Create Flyway migration script `V1__create_usuarios_table.sql`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107709905
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108062280
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108098181
+      }
+    ],
+    "4. Enable JPA Auditing in `SddApplication`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107711149
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108104218
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108144260
+      }
+    ],
+    "5. Create `SecurityConfig` exposing `BCryptPasswordEncoder` bean": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107712338
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108152530
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108223441
+      }
+    ],
+    "6. Create `EstadoUsuario` enum": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107713580
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108229390
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108291449
+      }
+    ],
+    "7. Create `Usuario` JPA entity": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107714771
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108297967
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108393782
+      }
+    ],
+    "8. Create `UsuarioRepository`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107715948
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108399992
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108440530
+      }
+    ],
+    "9. Create `UsuarioRequest` DTO": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107717159
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108446494
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108485841
+      }
+    ],
+    "10. Create `UsuarioUpdateRequest` DTO": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107718360
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108492385
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108558636
+      }
+    ],
+    "11. Create `UsuarioResponse` DTO": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107719535
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108565093
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108601616
+      }
+    ],
+    "12. Create `ApiError` and `PageResponse<T>` common DTOs": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107720701
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108607712
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108729244
+      }
+    ],
+    "13. Create `RecursoNoEncontradoException` and `DuplicadoException`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107721870
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108735391
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108790518
+      }
+    ],
+    "14. Create `GlobalExceptionHandler`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107723022
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108797281
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108877770
+      }
+    ],
+    "15. Create `UsuarioMapper` utility class": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107724186
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108884391
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108980982
+      }
+    ],
+    "16. Create `UsuarioService` interface": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107725367
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787108987134
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109019559
+      }
+    ],
+    "17. Implement `UsuarioServiceImpl`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107726550
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109025918
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109134383
+      }
+    ],
+    "18. Implement `UsuarioController`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107727740
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109141436
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109217200
+      }
+    ],
+    "19. Write unit tests for `UsuarioServiceImpl`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107728952
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109225449
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109521452
+      }
+    ],
+    "20. Write repository tests for `UsuarioRepository`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107730121
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787109528745
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787110042401
+      }
+    ],
+    "21. Write integration tests for `UsuarioController`": [
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787107731284
+      },
+      {
+        "executionId": "efac2cdc-c6a0-459c-90e0-c15250b408f7",
+        "chatSessionId": "sess_b5260231-0ac8-41c2-a7db-123f84e08ca0",
+        "timestamp": 1787110050433
+      },
+      {
+        "executionId": "536c5673-4bed-4c7e-88c2-96d317d67f8a",
+        "chatSessionId": "sess_96609151-3133-4a6b-b6a3-71411540ce7f",
+        "timestamp": 1787128375104
+      },
+      {
+        "executionId": "c21a89a6-61f6-4b53-8303-443b1b1a2d78",
+        "chatSessionId": "sess_96609151-3133-4a6b-b6a3-71411540ce7f",
+        "timestamp": 1787130717479
+      }
+    ]
+  }
+}
