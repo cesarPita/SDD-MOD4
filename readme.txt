@@ -1,6 +1,7 @@
 Nombre: Cesar Enrique Pita Perez
 Tecnologia: Spring Boot
-
+Api-Doc: http://localhost:8080/v3/api-docs
+Swagger: http://localhost:8080/swagger-ui/index.html
 A) Prompt Utilizado:
 
 Quiero implementar un módulo completo de Gestión de Usuarios utilizando Spec-Driven Development (SDD).
