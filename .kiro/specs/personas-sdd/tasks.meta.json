@@ -1,0 +1,191 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Crear `TipoDocumento`, `Genero` y `EstadoCivil` en `com.sdd.sdd.persona.entity`": [
+      {
+        "executionId": "48159f88-ba19-45a3-b023-cf1d3a916109",
+        "chatSessionId": "sess_d7b22a75-fc8a-4b3f-8145-49dd48788a5e",
+        "timestamp": 1787220272533
+      },
+      {
+        "executionId": "48159f88-ba19-45a3-b023-cf1d3a916109",
+        "chatSessionId": "sess_d7b22a75-fc8a-4b3f-8145-49dd48788a5e",
+        "timestamp": 1787220366231
+      }
+    ],
+    "1. Crear las enumeraciones del módulo Persona": [
+      {
+        "executionId": "48159f88-ba19-45a3-b023-cf1d3a916109",
+        "chatSessionId": "sess_d7b22a75-fc8a-4b3f-8145-49dd48788a5e",
+        "timestamp": 1787220366359
+      }
+    ],
+    "2.1 Crear la clase `Persona` en `com.sdd.sdd.persona.entity`": [
+      {
+        "executionId": "3e4a923b-db39-4f3f-b420-f092be2f5f3b",
+        "chatSessionId": "sess_aa1e4a3f-ce54-4cc4-b576-cb8ef534aafe",
+        "timestamp": 1787220398877
+      },
+      {
+        "executionId": "3e4a923b-db39-4f3f-b420-f092be2f5f3b",
+        "chatSessionId": "sess_aa1e4a3f-ce54-4cc4-b576-cb8ef534aafe",
+        "timestamp": 1787220522250
+      }
+    ],
+    "2. Crear la entidad JPA `Persona`": [
+      {
+        "executionId": "3e4a923b-db39-4f3f-b420-f092be2f5f3b",
+        "chatSessionId": "sess_aa1e4a3f-ce54-4cc4-b576-cb8ef534aafe",
+        "timestamp": 1787220522299
+      }
+    ],
+    "3.1 Crear el archivo `src/main/resources/db/migration/V2__create_personas_table.sql`": [
+      {
+        "executionId": "aa8ce530-d723-4566-bfa4-0f7f0fbd3066",
+        "chatSessionId": "sess_7b1f6a89-f7a5-4982-b3ab-5ba4c7be2c26",
+        "timestamp": 1787220546398
+      },
+      {
+        "executionId": "aa8ce530-d723-4566-bfa4-0f7f0fbd3066",
+        "chatSessionId": "sess_7b1f6a89-f7a5-4982-b3ab-5ba4c7be2c26",
+        "timestamp": 1787220612465
+      }
+    ],
+    "3. Crear la migración Flyway `V2__create_personas_table.sql`": [
+      {
+        "executionId": "aa8ce530-d723-4566-bfa4-0f7f0fbd3066",
+        "chatSessionId": "sess_7b1f6a89-f7a5-4982-b3ab-5ba4c7be2c26",
+        "timestamp": 1787220612516
+      }
+    ],
+    "4.1 Crear la interfaz `PersonaRepository` en `com.sdd.sdd.persona.repository`": [
+      {
+        "executionId": "e7c19be1-1f97-4fbc-9923-206c0cf055fb",
+        "chatSessionId": "sess_978d0cb1-b02a-4f53-a8a1-c1a7dd1ab556",
+        "timestamp": 1787220644860
+      },
+      {
+        "executionId": "e7c19be1-1f97-4fbc-9923-206c0cf055fb",
+        "chatSessionId": "sess_978d0cb1-b02a-4f53-a8a1-c1a7dd1ab556",
+        "timestamp": 1787220926561
+      },
+      {
+        "executionId": "fe9ed2d9-a2b5-4112-bb7f-d3d90c71d18f",
+        "chatSessionId": "sess_abd41318-e08b-455f-b82f-0f9adf2eee4a",
+        "timestamp": 1787220934615
+      },
+      {
+        "executionId": "fe9ed2d9-a2b5-4112-bb7f-d3d90c71d18f",
+        "chatSessionId": "sess_abd41318-e08b-455f-b82f-0f9adf2eee4a",
+        "timestamp": 1787220948248
+      }
+    ],
+    "4. Crear `PersonaRepository`": [
+      {
+        "executionId": "e7c19be1-1f97-4fbc-9923-206c0cf055fb",
+        "chatSessionId": "sess_978d0cb1-b02a-4f53-a8a1-c1a7dd1ab556",
+        "timestamp": 1787220926618
+      }
+    ],
+    "5.1 Crear `PersonaRequest` en `com.sdd.sdd.persona.dto`": [
+      {
+        "executionId": "00d07424-1042-4119-a532-dfd08087d222",
+        "chatSessionId": "sess_a4196d9e-b764-489a-b4b9-629813c21ae4",
+        "timestamp": 1787220961425
+      },
+      {
+        "executionId": "00d07424-1042-4119-a532-dfd08087d222",
+        "chatSessionId": "sess_a4196d9e-b764-489a-b4b9-629813c21ae4",
+        "timestamp": 1787225382152
+      }
+    ],
+    "5.2 Crear `PersonaResponse` en `com.sdd.sdd.persona.dto`": [
+      {
+        "executionId": "0d52d432-a81d-4c5b-ba62-da506f9b6b98",
+        "chatSessionId": "sess_a449b1b7-333e-42a7-88e7-7315a3084f36",
+        "timestamp": 1787225393866
+      },
+      {
+        "executionId": "0d52d432-a81d-4c5b-ba62-da506f9b6b98",
+        "chatSessionId": "sess_a449b1b7-333e-42a7-88e7-7315a3084f36",
+        "timestamp": 1787225452142
+      }
+    ],
+    "5. Crear los DTOs `PersonaRequest` y `PersonaResponse`": [
+      {
+        "executionId": "0d52d432-a81d-4c5b-ba62-da506f9b6b98",
+        "chatSessionId": "sess_a449b1b7-333e-42a7-88e7-7315a3084f36",
+        "timestamp": 1787225452199
+      }
+    ],
+    "6.1 Crear la clase utilitaria estática `PersonaMapper` en `com.sdd.sdd.persona.mapper`": [
+      {
+        "executionId": "5c868bbd-7e8a-4e6a-a19b-4d8ab57aba18",
+        "chatSessionId": "sess_09d1c250-b4c5-4ca2-b791-a76ff0e2d073",
+        "timestamp": 1787225535421
+      },
+      {
+        "executionId": "5c868bbd-7e8a-4e6a-a19b-4d8ab57aba18",
+        "chatSessionId": "sess_09d1c250-b4c5-4ca2-b791-a76ff0e2d073",
+        "timestamp": 1787225594598
+      }
+    ],
+    "6. Crear `PersonaMapper`": [
+      {
+        "executionId": "5c868bbd-7e8a-4e6a-a19b-4d8ab57aba18",
+        "chatSessionId": "sess_09d1c250-b4c5-4ca2-b791-a76ff0e2d073",
+        "timestamp": 1787225594676
+      }
+    ],
+    "7.1 Crear la interfaz `PersonaService` en `com.sdd.sdd.persona.service`": [
+      {
+        "executionId": "c3036db8-7a66-4ee5-8d8f-c21d2745b4e8",
+        "chatSessionId": "sess_9ac4b460-f564-47f8-9d02-c7027e031fc7",
+        "timestamp": 1787225619828
+      },
+      {
+        "executionId": "c3036db8-7a66-4ee5-8d8f-c21d2745b4e8",
+        "chatSessionId": "sess_9ac4b460-f564-47f8-9d02-c7027e031fc7",
+        "timestamp": 1787225684049
+      }
+    ],
+    "7.2 Crear `PersonaServiceImpl` en `com.sdd.sdd.persona.service`": [
+      {
+        "executionId": "4233af36-693c-414a-a210-412b20a219bc",
+        "chatSessionId": "sess_2042af63-0be0-479a-97b5-4a0db408fcb2",
+        "timestamp": 1787225722075
+      },
+      {
+        "executionId": "4233af36-693c-414a-a210-412b20a219bc",
+        "chatSessionId": "sess_2042af63-0be0-479a-97b5-4a0db408fcb2",
+        "timestamp": 1787225815781
+      }
+    ],
+    "7. Crear `PersonaService` y `PersonaServiceImpl`": [
+      {
+        "executionId": "4233af36-693c-414a-a210-412b20a219bc",
+        "chatSessionId": "sess_2042af63-0be0-479a-97b5-4a0db408fcb2",
+        "timestamp": 1787225815829
+      }
+    ],
+    "8.1 Crear `PersonaController` en `com.sdd.sdd.persona.controller`": [
+      {
+        "executionId": "8b53e259-cef6-467c-956e-88253c5321df",
+        "chatSessionId": "sess_a2f482fe-5c4f-4402-9e7f-edd0a927d6ea",
+        "timestamp": 1787225841632
+      },
+      {
+        "executionId": "8b53e259-cef6-467c-956e-88253c5321df",
+        "chatSessionId": "sess_a2f482fe-5c4f-4402-9e7f-edd0a927d6ea",
+        "timestamp": 1787226090207
+      }
+    ],
+    "8. Crear `PersonaController`": [
+      {
+        "executionId": "8b53e259-cef6-467c-956e-88253c5321df",
+        "chatSessionId": "sess_a2f482fe-5c4f-4402-9e7f-edd0a927d6ea",
+        "timestamp": 1787226090307
+      }
+    ]
+  }
+}
