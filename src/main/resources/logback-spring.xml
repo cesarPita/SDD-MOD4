@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <springProperty name="APP_NAME"  source="spring.application.name" defaultValue="sdd"/>
+  <property name="LOG_DIR"         value="logs"/>
+  <property name="MAX_FILE_SIZE"   value="50MB"/>
+  <property name="MAX_ERROR_SIZE"  value="20MB"/>
+  <property name="MAX_HISTORY"     value="30"/>
+  <property name="TOTAL_SIZE_CAP"  value="2GB"/>
+
+  <property name="CONSOLE_PATTERN"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%X{correlationId:--}] [%thread] %cyan(%-40.40logger{39}) : %msg%n"/>
+  <property name="FILE_PATTERN"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{correlationId:--}] [%thread] %-40.40logger{39} : %msg%n"/>
+
+  <!-- Consola -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${CONSOLE_PATTERN}</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- application.log (INFO+) -->
+  <appender name="FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/application.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/application-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+      <maxHistory>${MAX_HISTORY}</maxHistory>
+      <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${FILE_PATTERN}</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- application-error.log (solo ERROR) -->
+  <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/application-error.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/application-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>${MAX_ERROR_SIZE}</maxFileSize>
+      <maxHistory>${MAX_HISTORY}</maxHistory>
+      <totalSizeCap>500MB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${FILE_PATTERN}</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- audit.log — canal preparado para auditoria futura -->
+  <appender name="FILE_AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/audit.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/audit-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <maxHistory>90</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${FILE_PATTERN}</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- Canal AUDIT: solo en audit.log (no propaga al root) -->
+  <logger name="AUDIT" level="INFO" additivity="false">
+    <appender-ref ref="FILE_AUDIT"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <!-- Reducir ruido de infraestructura -->
+  <logger name="org.hibernate.SQL"                         level="WARN"/>
+  <logger name="org.hibernate.orm.jdbc.bind"               level="WARN"/>
+  <logger name="org.springframework.security"              level="WARN"/>
+  <logger name="org.springframework.web.filter"            level="WARN"/>
+  <logger name="org.flywaydb"                              level="INFO"/>
+  <logger name="com.sdd.sdd.common.logging.HttpLoggingFilter"   level="INFO"/>
+  <logger name="com.sdd.sdd.common.logging.CorrelationIdFilter" level="WARN"/>
+
+  <!-- Root: nivel controlado desde application.properties -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE_APP"/>
+    <appender-ref ref="FILE_ERROR"/>
+  </root>
+
+</configuration>

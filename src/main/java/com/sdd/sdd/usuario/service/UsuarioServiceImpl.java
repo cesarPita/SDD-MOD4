@@ -1,11 +1,5 @@
 package com.sdd.sdd.usuario.service;
 
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sdd.sdd.common.dto.PageResponse;
 import com.sdd.sdd.common.exception.DuplicadoException;
 import com.sdd.sdd.common.exception.RecursoNoEncontradoException;
@@ -16,104 +10,91 @@ import com.sdd.sdd.usuario.entity.EstadoUsuario;
 import com.sdd.sdd.usuario.entity.Usuario;
 import com.sdd.sdd.usuario.mapper.UsuarioMapper;
 import com.sdd.sdd.usuario.repository.UsuarioRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Implementación de {@link UsuarioService}.
- *
- * <p>Contiene toda la lógica de negocio del módulo de usuarios.
+ * Implementacion de {@link UsuarioService}.
  * El campo {@code password} nunca aparece en ninguna sentencia de log (RF-08-02).
  */
 @Service
 @Transactional
 public class UsuarioServiceImpl implements UsuarioService {
 
+    private static final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
+
     private final UsuarioRepository repository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public UsuarioServiceImpl(UsuarioRepository repository, BCryptPasswordEncoder passwordEncoder) {
-        this.repository = repository;
+        this.repository      = repository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // -------------------------------------------------------------------------
-    // RF-01 · Registro
-    // -------------------------------------------------------------------------
+    // ── RF-01 · Registro ──────────────────────────────────────────────────────
 
-    /**
-     * Registra un nuevo usuario.
-     *
-     * <ol>
-     *   <li>Verifica que el {@code username} no esté duplicado (RF-01-03).</li>
-     *   <li>Verifica que el {@code email} no esté duplicado (RF-01-04).</li>
-     *   <li>Cifra la contraseña con BCrypt (RF-01-06).</li>
-     *   <li>Persiste con {@code estado = ACTIVO} (RF-01-07).</li>
-     * </ol>
-     */
     @Override
     public UsuarioResponse registrar(UsuarioRequest request) {
-        System.out.println("ingresa aqui");
+        log.debug("Verificando disponibilidad de username={}", request.getUsername());
+
         if (repository.existsByUsername(request.getUsername())) {
+            log.warn("Intento de registro con username duplicado: username={}", request.getUsername());
             throw new DuplicadoException(
-                    "El username '" + request.getUsername() + "' ya está registrado.");
+                    "El username '" + request.getUsername() + "' ya esta registrado.");
         }
         if (repository.existsByEmail(request.getEmail())) {
+            log.warn("Intento de registro con email duplicado: email={}", request.getEmail());
             throw new DuplicadoException(
-                    "El email '" + request.getEmail() + "' ya está registrado.");
+                    "El email '" + request.getEmail() + "' ya esta registrado.");
         }
-        System.out.println("ing cifrado");
+
         String passwordCifrado = passwordEncoder.encode(request.getPassword());
-        System.out.println("sal cifrado");
         Usuario usuario = UsuarioMapper.toEntity(request, passwordCifrado);
-        System.out.println("sal usuario");
         Usuario guardado = repository.save(usuario);
-        System.out.println("sal guardado");
+
+        log.info("Usuario creado correctamente id={} username={}", guardado.getId(), guardado.getUsername());
         return UsuarioMapper.toResponse(guardado);
     }
 
-    // -------------------------------------------------------------------------
-    // RF-02 · Consulta
-    // -------------------------------------------------------------------------
+    // ── RF-02 · Consulta ──────────────────────────────────────────────────────
 
-    /**
-     * Obtiene un usuario por su {@code id} (RF-02-01).
-     *
-     * @throws RecursoNoEncontradoException si el id no existe
-     */
     @Override
     @Transactional(readOnly = true)
     public UsuarioResponse obtenerPorId(Long id) {
+        log.debug("Buscando usuario por id={}", id);
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException(
-                        "Usuario con id " + id + " no encontrado."));
+                .orElseThrow(() -> {
+                    log.warn("Usuario no encontrado id={}", id);
+                    return new RecursoNoEncontradoException("Usuario con id " + id + " no encontrado.");
+                });
         return UsuarioMapper.toResponse(usuario);
     }
 
-    /**
-     * Obtiene un usuario por su {@code username} (RF-02-02).
-     *
-     * @throws RecursoNoEncontradoException si el username no existe
-     */
     @Override
     @Transactional(readOnly = true)
     public UsuarioResponse obtenerPorUsername(String username) {
+        log.debug("Buscando usuario por username={}", username);
         Usuario usuario = repository.findByUsername(username)
-                .orElseThrow(() -> new RecursoNoEncontradoException(
-                        "Usuario con username '" + username + "' no encontrado."));
+                .orElseThrow(() -> {
+                    log.warn("Usuario no encontrado username={}", username);
+                    return new RecursoNoEncontradoException(
+                            "Usuario con username '" + username + "' no encontrado.");
+                });
         return UsuarioMapper.toResponse(usuario);
     }
 
-    /**
-     * Lista usuarios con filtros opcionales y paginación (RF-02-03, RF-02-04, RF-02-05).
-     *
-     * <p>Los filtros {@code username} y {@code email} usan LIKE insensible a mayúsculas.
-     * El filtro {@code estado} usa igualdad exacta.
-     */
     @Override
     @Transactional(readOnly = true)
     public PageResponse<UsuarioResponse> listar(String username, String email,
                                                 EstadoUsuario estado, Pageable pageable) {
-        Specification<Usuario> spec = Specification.where((Specification<Usuario>) null);
+        log.debug("Listando usuarios con filtros username={} email={} estado={}", username, email, estado);
 
+        Specification<Usuario> spec = Specification.where((Specification<Usuario>) null);
         if (username != null && !username.isBlank()) {
             spec = spec.and((root, query, cb) ->
                     cb.like(cb.lower(root.get("username")), "%" + username.toLowerCase() + "%"));
@@ -130,32 +111,23 @@ public class UsuarioServiceImpl implements UsuarioService {
         return PageResponse.of(repository.findAll(spec, pageable).map(UsuarioMapper::toResponse));
     }
 
-    // -------------------------------------------------------------------------
-    // RF-03 · Edición
-    // -------------------------------------------------------------------------
+    // ── RF-03 · Edicion ───────────────────────────────────────────────────────
 
-    /**
-     * Actualiza los campos permitidos de un usuario (RF-03-01 a RF-03-07).
-     *
-     * <ul>
-     *   <li>{@code username} no es modificable (RF-03-03).</li>
-     *   <li>Si el email cambia, verifica que no pertenezca a otro usuario (RF-03-04).</li>
-     *   <li>{@code fechaModificacion} se actualiza automáticamente por {@code @LastModifiedDate} (RF-03-05).</li>
-     * </ul>
-     *
-     * @throws RecursoNoEncontradoException si el id no existe
-     * @throws DuplicadoException           si el nuevo email ya pertenece a otro usuario
-     */
     @Override
     public UsuarioResponse actualizar(Long id, UsuarioUpdateRequest request) {
+        log.debug("Actualizando usuario id={}", id);
+
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException(
-                        "Usuario con id " + id + " no encontrado."));
+                .orElseThrow(() -> {
+                    log.warn("Intento de actualizacion de usuario inexistente id={}", id);
+                    return new RecursoNoEncontradoException("Usuario con id " + id + " no encontrado.");
+                });
 
         if (!usuario.getEmail().equalsIgnoreCase(request.getEmail())
                 && repository.existsByEmailAndIdNot(request.getEmail(), id)) {
+            log.warn("Intento de actualizacion con email duplicado id={} email={}", id, request.getEmail());
             throw new DuplicadoException(
-                    "El email '" + request.getEmail() + "' ya está registrado.");
+                    "El email '" + request.getEmail() + "' ya esta registrado.");
         }
 
         usuario.setNombres(request.getNombres());
@@ -164,26 +136,24 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEstado(request.getEstado());
 
         Usuario actualizado = repository.save(usuario);
+        log.info("Usuario actualizado correctamente id={}", id);
         return UsuarioMapper.toResponse(actualizado);
     }
 
-    // -------------------------------------------------------------------------
-    // RF-04 · Eliminación lógica
-    // -------------------------------------------------------------------------
+    // ── RF-04 · Eliminacion logica ────────────────────────────────────────────
 
-    /**
-     * Realiza una eliminación lógica: cambia el {@code estado} a {@code INACTIVO}
-     * sin borrar el registro físico (RF-04-01, RF-04-02, RF-04-03).
-     *
-     * @throws RecursoNoEncontradoException si el id no existe
-     */
     @Override
     public void eliminarLogico(Long id) {
+        log.debug("Ejecutando eliminacion logica id={}", id);
+
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException(
-                        "Usuario con id " + id + " no encontrado."));
+                .orElseThrow(() -> {
+                    log.warn("Intento de eliminacion de usuario inexistente id={}", id);
+                    return new RecursoNoEncontradoException("Usuario con id " + id + " no encontrado.");
+                });
 
         usuario.setEstado(EstadoUsuario.INACTIVO);
         repository.save(usuario);
+        log.info("Usuario desactivado (eliminacion logica) id={}", id);
     }
 }

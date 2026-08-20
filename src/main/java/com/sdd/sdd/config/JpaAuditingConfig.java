@@ -1,4 +1,4 @@
-﻿package com.sdd.sdd.config;
+package com.sdd.sdd.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,15 +11,12 @@ import java.util.Optional;
 /**
  * Configuracion de auditoria JPA.
  *
- * <p>Registra un {@link DateTimeProvider} que devuelve {@link OffsetDateTime},
- * resolviendo el error "Cannot convert unsupported date type java.time.LocalDateTime
- * to java.time.OffsetDateTime" que ocurre cuando Spring Data intenta poblar los
- * campos {@code @CreatedDate} / {@code @LastModifiedDate} de la entidad
- * {@code Usuario}, la cual declara esas fechas como {@code OffsetDateTime}.
+ * Registra un DateTimeProvider que devuelve OffsetDateTime, resolviendo el error
+ * "Cannot convert unsupported date type java.time.LocalDateTime to java.time.OffsetDateTime"
+ * que ocurre cuando Spring Data intenta poblar @CreatedDate/@LastModifiedDate
+ * de la entidad Usuario (declarados como OffsetDateTime).
  *
- * <p>Separada de {@code SddApplication} para permitir que las pruebas de slice
- * con {@code @DataJpaTest} puedan excluirla y proporcionar su propia
- * configuracion de auditoria compatible con el contexto de test.
+ * Separada de SddApplication para que los tests @DataJpaTest puedan excluirla.
  */
 @Configuration
 @EnableJpaAuditing(dateTimeProviderRef = "offsetDateTimeProvider")

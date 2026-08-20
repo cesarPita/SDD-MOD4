@@ -1,6 +1,7 @@
 Nombre: Cesar Enrique Pita Perez
 Tecnologia: Spring Boot
-Prompt Utilizado:
+
+A) Prompt Utilizado:
 
 Quiero implementar un módulo completo de Gestión de Usuarios utilizando Spec-Driven Development (SDD).
 
@@ -178,3 +179,265 @@ No implementes todavía el código hasta que la especificación, diseño y tarea
 
 Después de completar la especificación, espera mi aprobación para iniciar la implementación.
 
+B) Implementar manejo de logs
+Actúa como un arquitecto senior de Spring Boot.
+
+Quiero implementar primero un sistema de logging profesional en la aplicación. **Todavía NO implementes JWT ni Spring Security**. La seguridad con JWT será implementada en una etapa posterior.
+
+### 1. Analizar el proyecto
+
+Antes de realizar cambios:
+
+* Analiza la estructura actual del proyecto.
+* Identifica Controllers, Services, Repositories, configuración, excepciones y filtros existentes.
+* Identifica si ya existe algún mecanismo de logging.
+* Revisa el `GlobalExceptionHandler` existente.
+* Identifica la versión de Spring Boot y las dependencias actuales.
+* Respeta la arquitectura existente y evita introducir dependencias innecesarias.
+
+### 2. Implementar logging centralizado
+
+Utiliza el mecanismo estándar de Spring Boot:
+
+* SLF4J
+* Logback
+
+No utilizar `System.out.println()`.
+
+Implementa una configuración centralizada que permita controlar los niveles:
+
+* ERROR
+* WARN
+* INFO
+* DEBUG
+
+La configuración debe poder modificarse sin cambiar código fuente.
+
+### 3. Correlation ID
+
+Implementa un `OncePerRequestFilter` para manejar un `X-Correlation-ID`.
+
+Comportamiento:
+
+* Si la petición contiene `X-Correlation-ID`, reutilizarlo.
+* Si no existe, generar un UUID.
+* Guardarlo en MDC.
+* Incluirlo automáticamente en todos los logs generados durante la petición.
+* Devolverlo en la respuesta HTTP mediante `X-Correlation-ID`.
+* Limpiar el MDC correctamente al finalizar la petición.
+
+Esto debe permitir rastrear una petición completa desde Controller → Service → Repository → Exception Handler.
+
+### 4. Logging HTTP
+
+Implementa logging centralizado de las peticiones HTTP.
+
+Registrar como mínimo:
+
+* método HTTP
+* URI/endpoint
+* correlationId
+* código HTTP de respuesta
+* tiempo de procesamiento
+* resultado de la petición
+
+Ejemplo conceptual:
+
+```text
+INFO [correlationId=abc-123] HTTP POST /api/usuarios
+INFO [correlationId=abc-123] HTTP POST /api/usuarios completed status=201 duration=125ms
+```
+
+No registrar:
+
+* passwords
+* tokens
+* Authorization
+* secretos
+* credenciales
+* información sensible
+
+### 5. Logging por capas
+
+Agregar logging donde realmente aporte valor.
+
+#### Controller
+
+Registrar:
+
+* inicio de operaciones importantes
+* resultado de operaciones
+* parámetros únicamente cuando sean seguros de registrar
+
+#### Service
+
+Registrar:
+
+* operaciones de negocio relevantes
+* creación
+* actualización
+* eliminación
+* validaciones importantes
+* situaciones excepcionales
+
+#### Repository
+
+No agregar logging excesivo.
+
+Registrar únicamente errores o situaciones técnicas relevantes.
+
+No registrar automáticamente cada consulta SQL de producción.
+
+### 6. Niveles de logging
+
+Aplicar estas reglas:
+
+`ERROR`
+
+* excepciones
+* fallos de integración
+* errores de base de datos
+* errores inesperados
+
+`WARN`
+
+* situaciones anormales recuperables
+* validaciones importantes
+* recursos no encontrados cuando sea relevante
+
+`INFO`
+
+* operaciones importantes de negocio
+* inicio/finalización de procesos relevantes
+* información general de la aplicación
+
+`DEBUG`
+
+* información técnica utilizada para diagnóstico
+* detalles internos que no deberían aparecer normalmente en producción
+
+### 7. GlobalExceptionHandler
+
+Integrar el logging con el `GlobalExceptionHandler` existente.
+
+Cada excepción debe:
+
+* generar un log apropiado
+* incluir el `correlationId`
+* registrar stack trace únicamente en el servidor
+* devolver al cliente una respuesta controlada
+* no exponer información interna de la aplicación
+
+No duplicar el manejo de excepciones existente.
+
+### 8. Archivos de log
+
+Configurar Logback para permitir:
+
+* salida por consola
+* salida a archivo
+* rotación de logs
+* límite de tamaño
+* retención de archivos antiguos
+
+Preparar una estructura similar a:
+
+```text
+logs/
+ ├── application.log
+ ├── application-error.log
+ └── audit.log
+```
+
+Si consideras que separar `audit.log` en esta etapa es prematuro, déjalo preparado pero no implementes una solución compleja.
+
+### 9. Auditoría
+
+Por ahora NO implementar un sistema completo de auditoría persistente.
+
+Únicamente dejar preparada la arquitectura para que posteriormente podamos registrar:
+
+* usuario que realizó la operación
+* operación
+* recurso afectado
+* fecha/hora
+* resultado
+* correlationId
+
+La identificación del usuario se incorporará posteriormente cuando implementemos JWT.
+
+### 10. Preparación para observabilidad
+
+La implementación debe quedar preparada para una futura integración con:
+
+* OpenTelemetry
+* Jaeger
+* Dynatrace
+* ELK/OpenSearch
+* Grafana Loki
+
+No instalar estas herramientas todavía.
+
+El objetivo actual es únicamente dejar correctamente implementado el logging y el correlationId.
+
+### 11. Buenas prácticas
+
+Aplicar las siguientes reglas:
+
+* Utilizar SLF4J.
+* Utilizar placeholders:
+
+```java
+log.info("Usuario creado correctamente id={}", id);
+```
+
+en lugar de concatenaciones.
+
+* No registrar objetos completos si pueden contener información sensible.
+* No registrar credenciales.
+* No registrar JWT.
+* No registrar headers completos.
+* No registrar passwords.
+* No generar logs excesivos.
+* No modificar la lógica de negocio.
+* No crear clases innecesarias.
+
+### 12. Pruebas
+
+Después de implementar:
+
+1. Compila el proyecto.
+2. Ejecuta las pruebas existentes.
+3. Si es posible, agrega pruebas para:
+
+   * generación de correlationId
+   * reutilización de `X-Correlation-ID`
+   * propagación mediante MDC
+   * limpieza del MDC
+   * respuesta HTTP con `X-Correlation-ID`
+   * logging del tiempo de respuesta
+   * manejo de excepciones
+
+### 13. Resultado final
+
+Al terminar, muéstrame:
+
+1. Archivos creados.
+2. Archivos modificados.
+3. Dependencias agregadas.
+4. Configuración de logging.
+5. Ejemplo de logs generados.
+6. Cómo probar el `X-Correlation-ID` desde Postman.
+7. Resultado de la compilación.
+8. Resultado de las pruebas.
+
+IMPORTANTE:
+
+* NO implementar JWT.
+* NO implementar Spring Security.
+* NO modificar autenticación.
+* NO modificar autorización.
+* NO cambiar endpoints existentes.
+* NO cambiar lógica de negocio.
+
+Primero quiero dejar una base sólida de logging y trazabilidad. La implementación de JWT se realizará posteriormente sobre esta base.
